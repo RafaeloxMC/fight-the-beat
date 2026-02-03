@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c5b8rmhnqwnyf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwrxv"]
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqjtg"]
+albedo_color = Color(0.06469658, 0.06469651, 0.06469655, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cj0n"]
+albedo_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lnu2h"]
+albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+metallic_specular = 0.0
+
+[node name="Node3D" type="Node3D" unique_id=1119444477]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1225637725]
+size = Vector3(34.611916, 0.1, 65.16151)
+material = SubResource("StandardMaterial3D_4xowi")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1361662764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_uwrxv")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1938159293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_yqjtg")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1005866663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_8cj0n")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2001351325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_lnu2h")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1020769923]
+transform = Transform3D(1, 0, 0, 0, 0.7365813, 0.676349, 0, -0.676349, 0.7365813, 0, 1.7516259, 4.16409)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1146070137]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.79202, 0)
+light_angular_distance = 30.0
