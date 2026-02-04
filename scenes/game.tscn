@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c5b8rmhnqwnyf"]
 
+[ext_resource type="PackedScene" uid="uid://nd7dwmolsb7a" path="res://scenes/note.tscn" id="1_uwrxv"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
 albedo_color = Color(0, 0, 0, 1)
 metallic_specular = 0.0
@@ -21,6 +23,7 @@ albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
 metallic_specular = 0.0
 
 [sub_resource type="Environment" id="Environment_8cj0n"]
+glow_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0, 0, 0, 1)
@@ -38,20 +41,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_8cj0n")
 
+[node name="Note" parent="Lanes/LL" unique_id=1931999037 instance=ExtResource("1_uwrxv")]
+
+[node name="Note2" parent="Lanes/LL" unique_id=100715498 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+
 [node name="ML" type="CSGBox3D" parent="Lanes" unique_id=1938159293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_yqjtg")
+
+[node name="Note" parent="Lanes/ML" unique_id=315107322 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Note2" parent="Lanes/ML" unique_id=576951046 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="MR" type="CSGBox3D" parent="Lanes" unique_id=1361662764]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_uwrxv")
 
+[node name="Note" parent="Lanes/MR" unique_id=998551569 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Note2" parent="Lanes/MR" unique_id=1872881790 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
 [node name="RR" type="CSGBox3D" parent="Lanes" unique_id=2001351325]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_lnu2h")
+
+[node name="Note" parent="Lanes/RR" unique_id=157175474 instance=ExtResource("1_uwrxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020769923]
 transform = Transform3D(1, 0, 0, 0, 0.9041422, 0.42723155, 0, -0.42723155, 0.9041422, 0, 2.3448296, 21.790905)
