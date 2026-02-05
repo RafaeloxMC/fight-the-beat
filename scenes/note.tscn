@@ -6,6 +6,6 @@ emission_enabled = true
 emission = Color(0.13568348, 0.09922411, 0.95813066, 1)
 emission_energy_multiplier = 16.0
 
-[node name="Note" type="CSGBox3D" unique_id=1931999037]
+[node name="Note" type="CSGBox3D" unique_id=1931999037 groups=["TILE"]]
 size = Vector3(0.63183594, 0.5449219, 1)
 material = SubResource("StandardMaterial3D_7buut")
