@@ -1,5 +1,8 @@
 extends Node
 
+@export var base_tile = PackedScene
+@export var lanes: Array[Node3D] = []
+
 var bpm: int = 130
 var tiles: Array[Node3D] = []
 var speed: float
@@ -20,3 +23,11 @@ func _process(delta: float) -> void:
 			tiles.erase(tile)
 			print("Tile deleted!")
 		tile.position.z += speed * delta
+
+func add_new_note_to_lane(lane: Node3D) -> void:
+	var new_tile = base_tile.new().instantiate()
+	if new_tile is not Node3D:
+		new_tile.queue_free()
+		return
+	lane.add_child(new_tile as Node3D)
+	tiles.append(new_tile as Node3D)
