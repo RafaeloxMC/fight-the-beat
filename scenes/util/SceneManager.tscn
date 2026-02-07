@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b3eqp5e3itgqa"]
+
+[ext_resource type="Script" uid="uid://bp2f0sl15gefx" path="res://scripts/util/scene_manager.gd" id="1_sc2vh"]
+[ext_resource type="PackedScene" uid="uid://c441tl3lusljd" path="res://scenes/ui/main_menu.tscn" id="2_ydws1"]
+[ext_resource type="PackedScene" uid="uid://c5b8rmhnqwnyf" path="res://scenes/game.tscn" id="3_0j8va"]
+
+[node name="SceneManager" type="Node" unique_id=1102872458]
+script = ExtResource("1_sc2vh")
+scenes = Dictionary[String, PackedScene]({
+"game": ExtResource("3_0j8va"),
+"main_menu": ExtResource("2_ydws1")
+})
