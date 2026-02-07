@@ -1,0 +1,9 @@
+++TITLE++Super Taxi Sim Theme++
+++ARTIST++xvcf++
+++AUTHOR++xvcf++
+++YEAR++2025++
+++BPM++120++
+++LL++|-x-x-x-x-x-x-x-x-x-x-x-x-|++
+++ML++|-x-----x-----x-----x-----|++
+++MR++|-----x-----------x-------|++
+++RR++|-----------x-------------|++

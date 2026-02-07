@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneManager="*uid://b3eqp5e3itgqa"
+SongInterpreter="*uid://d0w1jrtsstc10"
 
 [editor_plugins]
 

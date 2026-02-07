@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d0w1jrtsstc10"]
+
+[ext_resource type="Script" uid="uid://q1bsbmgle85y" path="res://scripts/util/song_interpreter.gd" id="1_plul6"]
+
+[node name="SongInterpreter" type="Node" unique_id=716798459]
+script = ExtResource("1_plul6")

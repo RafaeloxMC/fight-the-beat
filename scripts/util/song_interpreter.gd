@@ -1,0 +1,22 @@
+extends Node
+
+var song_data: Dictionary[String, String]
+
+# BELOW IS AN EXAMPLE SONG SAVE FILE
+# ++TITLE++Super Taxi Sim Theme++
+# ++ARTIST++xvcf++
+# ++AUTHOR++xvcf++
+# ++YEAR++2025++
+# ++BPM++120++
+# ++LL++|-x-x-x-x-x-x-x-x-x-x-x-x-|++
+# ++ML++|-x-----x-----x-----x-----|++
+# ++MR++|-----x-----------x-------|++
+# ++RR++|-----------x-------------|++
+
+func parse_song_data(raw: String) -> void:
+	var data_lines: PackedStringArray = raw.split("\n")
+	for line in data_lines:
+		line = line.trim_prefix("++").trim_suffix("++")
+		print("Key: " + line.split("++")[0] + " - Value: " + line.split("++")[1])
+		song_data.set(line.split("++")[0], line.split("++")[1])
+	pass

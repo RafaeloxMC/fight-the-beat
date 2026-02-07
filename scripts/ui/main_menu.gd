@@ -25,6 +25,7 @@ func _on_file_picked(status: bool, selected_paths: PackedStringArray, _selected_
 		var fa = FileAccess.open(file, FileAccess.ModeFlags.READ)
 		var content = fa.get_as_text()
 		print("Loaded song file! Content: " + content)
+		SongInterpreter.parse_song_data(content)
 
 func _on_settings_pressed() -> void:
 	pass # Replace with function body.
