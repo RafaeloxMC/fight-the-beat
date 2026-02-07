@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	debug.text = SongManager.currently_playing.title + " - " + SongManager.currently_playing.artist
+	debug.text = SongManager.currently_playing.title + " - " + SongManager.currently_playing.artist + "(" + str(SongManager.currently_playing.bpm) + " BPM)" + "\nLL: " + str(SongManager.currently_playing.tiles_ll) + "\nML: " + str(SongManager.currently_playing.tiles_ml) + "\nMR: " + str(SongManager.currently_playing.tiles_mr) + "\nRR: " + str(SongManager.currently_playing.tiles_rr)
 	
 	for tile in tiles:
 		if !tile.is_queued_for_deletion() && tile.position.z > (tile.get_parent_node_3d() as CSGBox3D).size.z / 2:
