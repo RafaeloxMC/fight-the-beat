@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c441tl3lusljd"]
 
+[ext_resource type="Script" uid="uid://dup2m00kn3hdh" path="res://scripts/ui/main_menu.gd" id="1_fe2o3"]
 [ext_resource type="Theme" uid="uid://dndiri3lqyjwh" path="res://assets/themes/theme.tres" id="1_sl1te"]
 
 [node name="MainMenu" type="Control" unique_id=1316322672]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fe2o3")
 
 [node name="Control" type="Control" parent="." unique_id=1255945047]
 layout_mode = 1
@@ -81,3 +83,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
 text = "Quit"
+
+[connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
