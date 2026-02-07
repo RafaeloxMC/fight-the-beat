@@ -1,5 +1,7 @@
 extends Node
 
+@onready var trigger_line: Area3D = $TriggerLine
+
 @export var base_tile = PackedScene
 @export var lanes: Array[Node3D] = []
 
@@ -23,6 +25,27 @@ func _process(delta: float) -> void:
 			tiles.erase(tile)
 			print("Tile deleted!")
 		tile.position.z += speed * delta
+		
+	
+	var lanes_queued_for_deletion: Array[String] = []
+	
+	if Input.is_action_just_pressed("LEFT_LANE"):
+		lanes_queued_for_deletion.append("LL")
+	if Input.is_action_just_pressed("ML_LANE"):
+		lanes_queued_for_deletion.append("ML")
+	if Input.is_action_just_pressed("MR_LANE"):
+		lanes_queued_for_deletion.append("MR")
+	if Input.is_action_just_pressed("RIGHT_LANE"):
+		lanes_queued_for_deletion.append("RR")
+		
+	
+	for tile in trigger_line.get_overlapping_bodies():
+		tile = tile.get_parent() as CSGBox3D
+		if tile.is_in_group("TILE"):
+			if lanes_queued_for_deletion.has(tile.get_parent().name):
+				tile.queue_free()
+				tiles.erase(tile)
+				print("Tile removed")
 
 func add_new_note_to_lane(lane: Node3D) -> void:
 	var new_tile = base_tile.new().instantiate()

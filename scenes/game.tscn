@@ -23,15 +23,18 @@ metallic_specular = 0.0
 albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
 metallic_specular = 0.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbhrr"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.09803922)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yqjtg"]
+size = Vector3(4, 0.1, 0.1)
+
 [sub_resource type="Environment" id="Environment_8cj0n"]
 glow_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbhrr"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.09803922)
 
 [node name="Game" type="Node3D" unique_id=1119444477 node_paths=PackedStringArray("lanes")]
 script = ExtResource("2_yqjtg")
@@ -83,6 +86,16 @@ material = SubResource("StandardMaterial3D_lnu2h")
 [node name="Note" parent="Lanes/RR" unique_id=157175474 instance=ExtResource("1_uwrxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
+[node name="TriggerLine" type="Area3D" parent="." unique_id=452675051 groups=["TRIGGERLINE"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 20)
+
+[node name="TriggerLine" type="CSGBox3D" parent="TriggerLine" unique_id=1631917218 groups=["TRIGGERLINE"]]
+size = Vector3(4, 0.1, 0.1)
+material = SubResource("StandardMaterial3D_lbhrr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerLine" unique_id=1076111431]
+shape = SubResource("BoxShape3D_yqjtg")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020769923]
 transform = Transform3D(1, 0, 0, 0, 0.9041422, 0.42723155, 0, -0.42723155, 0.9041422, 0, 2.3448296, 21.790905)
 
@@ -92,8 +105,3 @@ light_angular_distance = 30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=369591376]
 environment = SubResource("Environment_8cj0n")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1124811951]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 20)
-size = Vector3(4, 0.1, 0.1)
-material = SubResource("StandardMaterial3D_lbhrr")
