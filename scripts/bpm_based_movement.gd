@@ -9,6 +9,8 @@ var bpm: int = 130
 var tiles: Array[Node3D] = []
 var speed: float
 
+var speed_multiplier = 2
+
 func _ready() -> void:
 	var notes = get_tree().get_nodes_in_group("TILE")
 	for note in notes:
@@ -16,7 +18,7 @@ func _ready() -> void:
 			tiles.append(note)
 	print("Found " + str(tiles.size()) + " notes!")
 	
-	speed = bpm / 60.0
+	speed = bpm / 60.0 * speed_multiplier
 
 func _process(delta: float) -> void:
 	for tile in tiles:
