@@ -145,3 +145,8 @@ grow_vertical = 2
 theme = ExtResource("3_lnu2h")
 theme_override_font_sizes/font_size = 48
 text = "Q            W            E            R"
+
+[node name="DEBUG" type="Label" parent="UI Container" unique_id=1859490017]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

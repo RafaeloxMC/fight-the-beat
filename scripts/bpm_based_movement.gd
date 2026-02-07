@@ -1,6 +1,7 @@
 extends Node
 
 @onready var trigger_line: Area3D = $TriggerLine
+@onready var debug: Label = $"UI Container/DEBUG"
 
 @export var base_tile = PackedScene
 @export var lanes: Array[Node3D] = []
@@ -21,6 +22,9 @@ func _ready() -> void:
 	speed = bpm / 60.0 * speed_multiplier
 
 func _process(delta: float) -> void:
+	
+	debug.text = SongManager.currently_playing.title + " - " + SongManager.currently_playing.artist
+	
 	for tile in tiles:
 		if !tile.is_queued_for_deletion() && tile.position.z > (tile.get_parent_node_3d() as CSGBox3D).size.z / 2:
 			tile.queue_free()

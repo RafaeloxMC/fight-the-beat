@@ -19,4 +19,10 @@ func parse_song_data(raw: String) -> void:
 		line = line.trim_prefix("++").trim_suffix("++")
 		print("Key: " + line.split("++")[0] + " - Value: " + line.split("++")[1])
 		song_data.set(line.split("++")[0], line.split("++")[1])
-	pass
+	var song = Song.new()
+	song.title = song_data.get("TITLE", "N/A")
+	song.artist = song_data.get("ARTIST", "N/A")
+	song.author = song_data.get("AUTHOR", "N/A")
+	song.year = song_data.get("YEAR", 1970)
+	song.bpm = song_data.get("BPM", 120)
+	SongManager.currently_playing = song

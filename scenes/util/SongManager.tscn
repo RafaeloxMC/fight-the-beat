@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://chros5odm0pjs"]
+
+[ext_resource type="Script" uid="uid://dxvuejyju2kyh" path="res://scripts/util/song_manager.gd" id="1_eixxt"]
+
+[node name="SongManager" type="Node" unique_id=1366397262]
+script = ExtResource("1_eixxt")
