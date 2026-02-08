@@ -39,6 +39,7 @@ volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node3D" unique_id=1119444477 node_paths=PackedStringArray("lanes")]
 script = ExtResource("2_yqjtg")
+base_tile = ExtResource("1_uwrxv")
 lanes = [NodePath("Lanes/LL"), NodePath("Lanes/ML"), NodePath("Lanes/MR"), NodePath("Lanes/RR")]
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1225637725]
@@ -52,40 +53,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_8cj0n")
 
-[node name="Note" parent="Lanes/LL" unique_id=1931999037 instance=ExtResource("1_uwrxv")]
-
-[node name="Note2" parent="Lanes/LL" unique_id=100715498 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
-
 [node name="ML" type="CSGBox3D" parent="Lanes" unique_id=1938159293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_yqjtg")
-
-[node name="Note" parent="Lanes/ML" unique_id=315107322 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-
-[node name="Note2" parent="Lanes/ML" unique_id=576951046 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
 
 [node name="MR" type="CSGBox3D" parent="Lanes" unique_id=1361662764]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_uwrxv")
 
-[node name="Note" parent="Lanes/MR" unique_id=998551569 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
-
-[node name="Note2" parent="Lanes/MR" unique_id=1872881790 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
-
 [node name="RR" type="CSGBox3D" parent="Lanes" unique_id=2001351325]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, 0)
 size = Vector3(1, 0.1, 60)
 material = SubResource("StandardMaterial3D_lnu2h")
-
-[node name="Note" parent="Lanes/RR" unique_id=157175474 instance=ExtResource("1_uwrxv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
 
 [node name="TriggerLine" type="Area3D" parent="." unique_id=452675051 groups=["TRIGGERLINE"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 20)
