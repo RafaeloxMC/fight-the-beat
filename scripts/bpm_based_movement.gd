@@ -10,7 +10,7 @@ var bpm: int = 130
 var tiles: Array[Node3D] = []
 var speed: float
 
-var speed_multiplier = 2
+var speed_multiplier = 4
 
 func _ready() -> void:
 	spawn_lane(SongManager.currently_playing.tiles_ll, lanes[0])
