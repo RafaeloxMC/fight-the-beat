@@ -9,7 +9,6 @@ var speed: float
 
 var speed_multiplier = 4
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_lane(lanes[0])
 	spawn_lane(lanes[1])
@@ -18,13 +17,11 @@ func _ready() -> void:
 	
 	speed = bpm / 60.0 * speed_multiplier
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	for tile in tiles:
 		if !tile.is_queued_for_deletion() && tile.position.z > (tile.get_parent_node_3d() as CSGBox3D).size.z / 2:
 			tile.queue_free()
 			tiles.erase(tile)
-			print("Tile deleted!")
 		tile.position.z += speed * delta
 		
 	
@@ -49,7 +46,6 @@ func add_new_note_to_lane(lane: CSGBox3D) -> void:
 	tiles.append(new_tile)
 
 func spawn_lane(lane: Node3D) -> void:
-	print("Spawned!")
 	add_new_note_to_lane(lane)
 	await get_tree().create_timer(randf_range(0.5, 4)).timeout
 	spawn_lane(lane)
