@@ -2,8 +2,26 @@
 
 [ext_resource type="Script" uid="uid://dup2m00kn3hdh" path="res://scripts/ui/main_menu.gd" id="1_fe2o3"]
 [ext_resource type="Theme" uid="uid://dndiri3lqyjwh" path="res://assets/themes/theme.tres" id="1_sl1te"]
+[ext_resource type="Environment" uid="uid://r3rud53mhmmu" path="res://assets/environments/world.tres" id="3_1g8jr"]
+[ext_resource type="PackedScene" uid="uid://nd7dwmolsb7a" path="res://scenes/note.tscn" id="4_m1kxf"]
 
-[node name="MainMenu" type="Control" unique_id=1316322672]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1kxf"]
+albedo_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2yvf"]
+albedo_color = Color(0.06469658, 0.06469651, 0.06469655, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhagc"]
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btxxm"]
+albedo_color = Color(0.019607844, 0.019607844, 0.019607844, 1)
+metallic_specular = 0.0
+
+[node name="MainMenu" type="Control" unique_id=1316322672 node_paths=PackedStringArray("lanes")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +29,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fe2o3")
+base_tile = ExtResource("4_m1kxf")
+lanes = [NodePath("3D Container/Lanes/LL"), NodePath("3D Container/Lanes/ML"), NodePath("3D Container/Lanes/MR"), NodePath("3D Container/Lanes/RR")]
 
 [node name="Control" type="Control" parent="." unique_id=1255945047]
 layout_mode = 1
@@ -99,6 +119,41 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
 text = "Quit"
+
+[node name="3D Container" type="Node3D" parent="." unique_id=1262582697]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3D Container" unique_id=1333445168]
+environment = ExtResource("3_1g8jr")
+
+[node name="Camera3D" type="Camera3D" parent="3D Container" unique_id=545493147]
+transform = Transform3D(0.8660254, -0.25, 0.4330127, 0, 0.8660254, 0.5, -0.5, -0.4330127, 0.75, 1, 2, 2)
+
+[node name="Lanes" type="Node3D" parent="3D Container" unique_id=1545052478]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25)
+
+[node name="LL" type="CSGBox3D" parent="3D Container/Lanes" unique_id=775254261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_m1kxf")
+
+[node name="ML" type="CSGBox3D" parent="3D Container/Lanes" unique_id=1419726006]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_x2yvf")
+
+[node name="MR" type="CSGBox3D" parent="3D Container/Lanes" unique_id=280006139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_uhagc")
+
+[node name="RR" type="CSGBox3D" parent="3D Container/Lanes" unique_id=182208839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, 0)
+size = Vector3(1, 0.1, 60)
+material = SubResource("StandardMaterial3D_btxxm")
+
+[node name="Lighting" type="DirectionalLight3D" parent="3D Container" unique_id=632581152]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.79202, 0)
+light_angular_distance = 30.0
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Load Song" to="." method="_on_load_song_pressed"]

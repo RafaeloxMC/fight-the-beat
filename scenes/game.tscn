@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://nd7dwmolsb7a" path="res://scenes/note.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://b3j0wcbd53ll1" path="res://scripts/bpm_based_movement.gd" id="2_yqjtg"]
+[ext_resource type="Environment" uid="uid://r3rud53mhmmu" path="res://assets/environments/world.tres" id="3_lbhrr"]
 [ext_resource type="Theme" uid="uid://dndiri3lqyjwh" path="res://assets/themes/theme.tres" id="3_lnu2h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
@@ -30,12 +31,6 @@ albedo_color = Color(1, 1, 1, 0.09803922)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yqjtg"]
 size = Vector3(4, 0.5, 0.1)
-
-[sub_resource type="Environment" id="Environment_8cj0n"]
-glow_enabled = true
-fog_light_color = Color(0, 0, 0, 1)
-volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node3D" unique_id=1119444477 node_paths=PackedStringArray("lanes")]
 script = ExtResource("2_yqjtg")
@@ -88,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8
 light_angular_distance = 30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=369591376]
-environment = SubResource("Environment_8cj0n")
+environment = ExtResource("3_lbhrr")
 
 [node name="UI Container" type="Control" parent="." unique_id=975577499]
 layout_mode = 3
