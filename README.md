@@ -1,2 +1,2 @@
 # fight-the-beat
-A rythm game!
+A rhythm game!
