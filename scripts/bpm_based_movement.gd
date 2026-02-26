@@ -20,6 +20,8 @@ var cursors: Array[int] = [0, 0, 0, 0]
 var lane_patterns: Array = []
 var lane_names: Array[String] = ["LL", "ML", "MR", "RR"]
 
+var combo: int = 0
+
 const SUBDIVISIONS: int = 48
 
 func _ready() -> void:
@@ -76,6 +78,7 @@ func _process(delta: float) -> void:
 		if tile.position.z > (tile.get_parent_node_3d() as CSGBox3D).size.z / 2:
 			tile.queue_free()
 			tiles.erase(tile)
+			combo = 0
 
 	var lanes_queued_for_deletion: Array[String] = []
 	if Input.is_action_just_pressed("LEFT_LANE"):  lanes_queued_for_deletion.append("LL")
@@ -83,14 +86,19 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("MR_LANE"):    lanes_queued_for_deletion.append("MR")
 	if Input.is_action_just_pressed("RIGHT_LANE"): lanes_queued_for_deletion.append("RR")
 
-	for tile in trigger_line.get_overlapping_bodies():
-		var box: CSGBox3D = tile.get_parent() as CSGBox3D
-		if box and box.is_in_group("TILE"):
-			if lanes_queued_for_deletion.has(box.get_parent().name):
-				box.queue_free()
-				tiles.erase(box)
+	var overlapping: Array[Node3D] = trigger_line.get_overlapping_bodies()
+	if overlapping.size() == 0:
+		combo = 0
+	else:
+		for tile in overlapping:
+			var box: CSGBox3D = tile.get_parent() as CSGBox3D
+			if box and box.is_in_group("TILE"):
+				if lanes_queued_for_deletion.has(box.get_parent().name):
+					box.queue_free()
+					tiles.erase(box)
+					combo += 1
 
-	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d" % [
+	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d" % [
 		SongManager.currently_playing.title,
 		SongManager.currently_playing.artist,
 		SongManager.currently_playing.bpm,
@@ -99,6 +107,7 @@ func _process(delta: float) -> void:
 		_count_true(SongManager.currently_playing.tiles_mr),
 		_count_true(SongManager.currently_playing.tiles_rr),
 		tiles.size(),
+		combo
 	]
 
 func _spawn_tile(lane: Node3D, beats_ahead: float) -> void:
