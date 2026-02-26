@@ -44,23 +44,23 @@ material = SubResource("StandardMaterial3D_4xowi")
 [node name="Lanes" type="Node3D" parent="." unique_id=736563429]
 
 [node name="LL" type="CSGBox3D" parent="Lanes" unique_id=1005866663]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, 0)
-size = Vector3(1, 0.1, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.095, -4.5)
+size = Vector3(1, 0.1, 51)
 material = SubResource("StandardMaterial3D_8cj0n")
 
 [node name="ML" type="CSGBox3D" parent="Lanes" unique_id=1938159293]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, 0)
-size = Vector3(1, 0.1, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.095, -4.5)
+size = Vector3(1, 0.1, 51)
 material = SubResource("StandardMaterial3D_yqjtg")
 
 [node name="MR" type="CSGBox3D" parent="Lanes" unique_id=1361662764]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, 0)
-size = Vector3(1, 0.1, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.095, -4.5)
+size = Vector3(1, 0.1, 51)
 material = SubResource("StandardMaterial3D_uwrxv")
 
 [node name="RR" type="CSGBox3D" parent="Lanes" unique_id=2001351325]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, 0)
-size = Vector3(1, 0.1, 60)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.095, -4.5)
+size = Vector3(1, 0.1, 51)
 material = SubResource("StandardMaterial3D_lnu2h")
 
 [node name="TriggerLine" type="Area3D" parent="." unique_id=452675051 groups=["TRIGGERLINE"]]
@@ -77,6 +77,7 @@ shape = SubResource("BoxShape3D_yqjtg")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020769923]
 transform = Transform3D(1, 0, 0, 0, 0.9041422, 0.42723155, 0, -0.42723155, 0.9041422, 0, 2.3448296, 21.790905)
+far = 40.0
 
 [node name="Lighting" type="DirectionalLight3D" parent="." unique_id=1146070137]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 8.79202, 0)

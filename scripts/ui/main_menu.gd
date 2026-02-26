@@ -61,11 +61,8 @@ func _on_load_song_pressed() -> void:
 func _on_file_picked(status: bool, selected_paths: PackedStringArray, _selected_filter_index: int) -> void:
 	if status == true:
 		var file = selected_paths[0]
-		print("Loading song file at " + file)
-		var fa = FileAccess.open(file, FileAccess.ModeFlags.READ)
-		var content = fa.get_as_text()
-		print("Loaded song file! Content: " + content)
-		SongInterpreter.parse_song_data(content)
+		print("Main Menu: Loading song file at " + file)
+		SongInterpreter.load_song_from_file(file)
 
 func _on_settings_pressed() -> void:
 	pass # Replace with function body.
