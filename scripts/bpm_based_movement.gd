@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 		lanes_queued_for_deletion.append("RR")
 
 	var overlapping: Array[Node3D] = trigger_line.get_overlapping_bodies()
-	if overlapping.size() == 0:
+	if overlapping.size() == 0 && lanes_queued_for_deletion.size() > 0:
 		combo = 0
 	else:
 		for tile in overlapping:
