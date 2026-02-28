@@ -81,10 +81,14 @@ func _process(delta: float) -> void:
 			combo = 0
 
 	var lanes_queued_for_deletion: Array[String] = []
-	if Input.is_action_just_pressed("LEFT_LANE"):  lanes_queued_for_deletion.append("LL")
-	if Input.is_action_just_pressed("ML_LANE"):    lanes_queued_for_deletion.append("ML")
-	if Input.is_action_just_pressed("MR_LANE"):    lanes_queued_for_deletion.append("MR")
-	if Input.is_action_just_pressed("RIGHT_LANE"): lanes_queued_for_deletion.append("RR")
+	if Input.is_action_just_pressed("LEFT_LANE"):
+		lanes_queued_for_deletion.append("LL")
+	if Input.is_action_just_pressed("ML_LANE"):
+		lanes_queued_for_deletion.append("ML")
+	if Input.is_action_just_pressed("MR_LANE"):
+		lanes_queued_for_deletion.append("MR")
+	if Input.is_action_just_pressed("RIGHT_LANE"):
+		lanes_queued_for_deletion.append("RR")
 
 	var overlapping: Array[Node3D] = trigger_line.get_overlapping_bodies()
 	if overlapping.size() == 0:
@@ -94,8 +98,11 @@ func _process(delta: float) -> void:
 			var box: CSGBox3D = tile.get_parent() as CSGBox3D
 			if box and box.is_in_group("TILE"):
 				if lanes_queued_for_deletion.has(box.get_parent().name):
-					box.queue_free()
 					tiles.erase(box)
+					if box.has_node("AnimationPlayer"):
+						(box.get_node("AnimationPlayer") as AnimationPlayer).play("clear")
+					else:
+						box.queue_free()
 					combo += 1
 
 	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d" % [
