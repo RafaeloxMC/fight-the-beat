@@ -7,6 +7,8 @@ var author: String = "N/A"
 var year: int = 1970
 var bpm: float = 120
 
+var stream: AudioStream
+
 var tiles_ll: Array[bool] = []
 var tiles_ml: Array[bool] = []
 var tiles_mr: Array[bool] = []

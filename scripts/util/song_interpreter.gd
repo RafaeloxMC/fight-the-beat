@@ -1,6 +1,7 @@
 extends Node
 
 var song_data: Dictionary[String, String]
+var song_aud: AudioStream
 
 func load_song_from_file(path: String) -> void:
 	if path.ends_with(".osz") or path.ends_with(".zip"):
@@ -23,16 +24,32 @@ func _parse_osz(osz_path: String) -> void:
 		return
 
 	var osu_text: String = ""
+	song_aud = null   # reset before loading
+
 	for entry in zip.get_files():
 		if entry.ends_with(".osu"):
 			var bytes: PackedByteArray = zip.read_file(entry)
 			osu_text = bytes.get_string_from_utf8()
 			break
-
+			
+	for entry in zip.get_files():
+		if entry.ends_with(".ogg"):
+			var audio: PackedByteArray = zip.read_file(entry)
+			song_aud = AudioStreamOggVorbis.load_from_buffer(audio)
+			break
+		if entry.ends_with(".mp3"):
+			var audio: PackedByteArray = zip.read_file(entry)
+			song_aud = AudioStreamMP3.load_from_buffer(audio)
+			break
+		
 	zip.close()
 
 	if osu_text.is_empty():
 		push_error("SongInterpreter: No .osu file found inside archive: " + osz_path)
+		return
+		
+	if song_aud == null:
+		push_error("No audio file found in archive")
 		return
 
 	parse_osu_data(osu_text)
@@ -108,6 +125,7 @@ func parse_osu_data(raw: String) -> void:
 	song.artist = artist
 	song.author = author
 	song.year = 0
+	song.stream = song_aud
 
 	var primary_beat_len: float = timing_points[0].beat_length
 	song.bpm = int(round(60000.0 / primary_beat_len))

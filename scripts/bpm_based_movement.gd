@@ -2,6 +2,7 @@ extends Node
 
 @onready var trigger_line: Area3D = $TriggerLine
 @onready var debug: Label = $"UI Container/DEBUG"
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @export var base_tile: PackedScene
 @export var lanes: Array[Node3D] = []
@@ -29,6 +30,8 @@ func _ready() -> void:
 	bpm = song.bpm
 	beats_per_second = bpm / 60.0
 	speed = beats_per_second * speed_multiplier
+	
+	audio_stream_player.stream = song.stream
 
 	lane_patterns = [
 		song.tiles_ll,
@@ -43,6 +46,9 @@ func _ready() -> void:
 		_count_true(song.tiles_mr),
 		_count_true(song.tiles_rr),
 	])
+	
+	await get_tree().create_timer(beats_per_second - 0.85).timeout
+	audio_stream_player.play()
 
 func _count_true(arr: Array[bool]) -> int:
 	var n: int = 0

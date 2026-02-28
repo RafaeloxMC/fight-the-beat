@@ -129,3 +129,5 @@ text = "Q            W            E            R"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1452646406]
