@@ -24,7 +24,7 @@ func _parse_osz(osz_path: String) -> void:
 		return
 
 	var osu_text: String = ""
-	song_aud = null   # reset before loading
+	song_aud = null
 
 	for entry in zip.get_files():
 		if entry.ends_with(".osu"):
@@ -104,12 +104,18 @@ func parse_osu_data(raw: String) -> void:
 						
 			"HitObjects":
 				var parts: PackedStringArray = line.split(",")
-				if parts.size() >= 3:
+				if parts.size() >= 5:
 					var x: int = int(parts[0])
-					var time_ms: int = int(parts[2])
+					var time_ms: float = float(parts[2])
+					var hit_type: int = int(parts[3])
 					var column: int = int(floor(float(x) * key_count / 512.0))
 					column = clampi(column, 0, key_count - 1)
-					hit_objects.append({ "time_ms": time_ms, "column": column })
+					var out_col: int = int(floor(float(column) * 4.0 / float(key_count)))
+					out_col = clampi(out_col, 0, 3)
+					var end_ms: float = time_ms
+					if (hit_type & 128) != 0 and parts.size() >= 6:
+						end_ms = float(parts[5].split(":")[0])
+					hit_objects.append({"time_ms": time_ms, "end_ms": end_ms, "column": out_col})
 					
 	if timing_points.is_empty():
 		push_error("SongInterpreter: No uninherited timing points found in .osu file.")
@@ -147,13 +153,17 @@ func parse_osu_data(raw: String) -> void:
 	var note_indices: Array[Dictionary] = []
 	
 	for ho in hit_objects:
-		var t: float    = ho["time_ms"]
-		var bl: float   = _get_beat_length.call(t)
+		var t: float = ho["time_ms"]
+		var end_t: float = ho["end_ms"]
+		var bl: float = _get_beat_length.call(t)
 		var beat_pos: float = (t - t0) / bl
 		var beat_idx: int = int(round(beat_pos * SUBDIVISIONS))
 		if beat_idx < 0:
 			beat_idx = 0
-		note_indices.append({ "beat": beat_idx, "column": ho["column"] })
+		var dur_beats: float = (end_t - t) / bl
+		if dur_beats < 1.0 / SUBDIVISIONS:
+			dur_beats = 1.0 / SUBDIVISIONS
+		note_indices.append({"beat": beat_idx, "dur": dur_beats, "column": ho["column"]})
 		if beat_idx > max_beat_index:
 			max_beat_index = beat_idx
 			
@@ -162,18 +172,19 @@ func parse_osu_data(raw: String) -> void:
 	song.tiles_ml.resize(size)
 	song.tiles_mr.resize(size)
 	song.tiles_rr.resize(size)
-	song.tiles_ll.fill(false)
-	song.tiles_ml.fill(false)
-	song.tiles_mr.fill(false)
-	song.tiles_rr.fill(false)
+	song.tiles_ll.fill(0.0)
+	song.tiles_ml.fill(0.0)
+	song.tiles_mr.fill(0.0)
+	song.tiles_rr.fill(0.0)
 	
 	for ni in note_indices:
 		var b: int = ni["beat"]
+		var dur: float = ni["dur"]
 		match ni["column"]:
-			0: song.tiles_ll[b] = true
-			1: song.tiles_ml[b] = true
-			2: song.tiles_mr[b] = true
-			3: song.tiles_rr[b] = true
+			0: song.tiles_ll[b] = dur
+			1: song.tiles_ml[b] = dur
+			2: song.tiles_mr[b] = dur
+			3: song.tiles_rr[b] = dur
 
 	SongManager.currently_playing = song
 	print("Song Interpreter: Loaded osu! map: %s – %s  (%d BPM, %d notes)" % [
@@ -190,24 +201,25 @@ func parse_song_data(raw: String) -> void:
 		song_data.set(parts[0], parts[1])
 		
 	var song: Song = Song.new()
-	song.title = song_data.get("TITLE",  "N/A")
+	song.title = song_data.get("TITLE", "N/A")
 	song.artist = song_data.get("ARTIST", "N/A")
 	song.author = song_data.get("AUTHOR", "N/A")
-	song.year = song_data.get("YEAR",   1970)
-	song.bpm = song_data.get("BPM",    120)
+	song.year = song_data.get("YEAR", 1970)
+	song.bpm = song_data.get("BPM", 120)
 	
 	var ll: String = (song_data.get("LL", "|-|") as String).trim_prefix("|").trim_suffix("|")
 	var ml: String = (song_data.get("ML", "|-|") as String).trim_prefix("|").trim_suffix("|")
 	var mr: String = (song_data.get("MR", "|-|") as String).trim_prefix("|").trim_suffix("|")
 	var rr: String = (song_data.get("RR", "|-|") as String).trim_prefix("|").trim_suffix("|")
 	
+	const TAP_DUR: float = 1.0 / 48
 	for beat in ll:
-		song.tiles_ll.append(beat == "x")
+		song.tiles_ll.append(TAP_DUR if beat == "x" else 0.0)
 	for beat in ml:
-		song.tiles_ml.append(beat == "x")
+		song.tiles_ml.append(TAP_DUR if beat == "x" else 0.0)
 	for beat in mr:
-		song.tiles_mr.append(beat == "x")
+		song.tiles_mr.append(TAP_DUR if beat == "x" else 0.0)
 	for beat in rr:
-		song.tiles_rr.append(beat == "x")
+		song.tiles_rr.append(TAP_DUR if beat == "x" else 0.0)
 		
 	SongManager.currently_playing = song

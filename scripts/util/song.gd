@@ -9,7 +9,7 @@ var bpm: float = 120
 
 var stream: AudioStream
 
-var tiles_ll: Array[bool] = []
-var tiles_ml: Array[bool] = []
-var tiles_mr: Array[bool] = []
-var tiles_rr: Array[bool] = []
+var tiles_ll: Array[float] = []
+var tiles_ml: Array[float] = []
+var tiles_mr: Array[float] = []
+var tiles_rr: Array[float] = []
