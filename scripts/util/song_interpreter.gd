@@ -2,6 +2,7 @@ extends Node
 
 var song_data: Dictionary[String, String]
 var song_aud: AudioStream
+var song_bg
 
 func load_song_from_file(path: String) -> void:
 	if path.ends_with(".osz") or path.ends_with(".zip"):
@@ -41,6 +42,24 @@ func _parse_osz(osz_path: String) -> void:
 			var audio: PackedByteArray = zip.read_file(entry)
 			song_aud = AudioStreamMP3.load_from_buffer(audio)
 			break
+			
+	for entry in zip.get_files():
+		var e = entry.to_lower()
+		if e.ends_with(".jpg") || e.ends_with(".jpeg") || e.ends_with(".png"):
+			song_bg = Image.new()
+			var bg: PackedByteArray = zip.read_file(entry)
+			var bgerr
+			if e.ends_with(".jpg") || e.ends_with(".jpeg"):
+				bgerr = song_bg.load_jpg_from_buffer(bg)
+			if e.ends_with(".png"):
+				bgerr = song_bg.load_png_from_buffer(bg)
+				
+			if bgerr == OK:
+				print("Loaded background")
+				print("BG SIZE: ", song_bg.get_size())
+				break
+			else:
+				print("Error while loading background: " + str(bgerr))
 		
 	zip.close()
 
@@ -132,6 +151,7 @@ func parse_osu_data(raw: String) -> void:
 	song.author = author
 	song.year = 0
 	song.stream = song_aud
+	song.bg = song_bg
 
 	var primary_beat_len: float = timing_points[0].beat_length
 	song.bpm = int(round(60000.0 / primary_beat_len))

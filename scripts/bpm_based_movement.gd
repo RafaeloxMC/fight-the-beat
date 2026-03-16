@@ -3,6 +3,7 @@ extends Node
 @onready var trigger_line: Area3D = $TriggerLine
 @onready var debug: Label = $"UI Container/DEBUG"
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var world_environment: WorldEnvironment = $WorldEnvironment
 
 @export var base_tile: PackedScene
 @export var lanes: Array[Node3D] = []
@@ -40,7 +41,18 @@ func _ready() -> void:
 	elapsed_time = - audio_delay
 	
 	audio_stream_player.stream = song.stream
+	
+	if song.bg:
+		# Duplicate the resource chain so we're not editing shared/cached originals
+		var env: Environment = world_environment.environment.duplicate()
+		var sky: Sky = env.sky.duplicate()
+		var sky_mat: PanoramaSkyMaterial = sky.sky_material.duplicate()
 
+		sky_mat.panorama = ImageTexture.create_from_image(song.bg)
+		sky.sky_material = sky_mat
+		env.sky = sky
+		world_environment.environment = env
+		
 	lane_patterns = [
 		song.tiles_ll,
 		song.tiles_ml,

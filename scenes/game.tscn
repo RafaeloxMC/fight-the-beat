@@ -38,6 +38,7 @@ base_tile = ExtResource("1_uwrxv")
 lanes = [NodePath("Lanes/LL"), NodePath("Lanes/ML"), NodePath("Lanes/MR"), NodePath("Lanes/RR")]
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1225637725]
+visible = false
 size = Vector3(64.55221, 0.1, 65.16151)
 material = SubResource("StandardMaterial3D_4xowi")
 
@@ -76,7 +77,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("BoxShape3D_yqjtg")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020769923]
-transform = Transform3D(1, 0, 0, 0, 0.9041422, 0.42723155, 0, -0.42723155, 0.9041422, 0, 2.3448296, 21.790905)
+transform = Transform3D(1, 0, 0, 0, 0.90414226, 0.42723158, 0, -0.42723158, 0.90414226, 0, 2.345, 21.25)
+fov = 100.0
 far = 40.0
 
 [node name="Lighting" type="DirectionalLight3D" parent="." unique_id=1146070137]
