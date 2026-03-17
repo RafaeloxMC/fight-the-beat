@@ -43,14 +43,18 @@ func _ready() -> void:
 	audio_stream_player.stream = song.stream
 	
 	if song.bg:
-		# Duplicate the resource chain so we're not editing shared/cached originals
 		var env: Environment = world_environment.environment.duplicate()
 		var sky: Sky = env.sky.duplicate()
 		var sky_mat: PanoramaSkyMaterial = sky.sky_material.duplicate()
-
+		
 		sky_mat.panorama = ImageTexture.create_from_image(song.bg)
 		sky.sky_material = sky_mat
 		env.sky = sky
+		world_environment.environment = env
+	else:
+		var env: Environment = world_environment.environment.duplicate()
+		
+		env.background_mode = Environment.BG_CLEAR_COLOR
 		world_environment.environment = env
 		
 	lane_patterns = [
