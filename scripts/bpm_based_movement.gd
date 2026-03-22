@@ -29,6 +29,8 @@ var combo: int = 0
 const SUBDIVISIONS: int = 48
 
 var audio_delay: float = 0.0
+var audio_ended: bool = false
+var audio_playing: bool = false
 
 func _ready() -> void:
 	var song = SongManager.currently_playing
@@ -82,12 +84,19 @@ func _count_notes(arr: Array[float]) -> int:
 
 func _process(delta: float) -> void:
 	if audio_stream_player.playing:
+		audio_playing = true
 		elapsed_time = audio_stream_player.get_playback_position() \
 			+ AudioServer.get_time_since_last_mix() \
 			- AudioServer.get_output_latency()
 	else:
+		if audio_playing:
+			audio_playing = false
+			audio_ended = true
 		elapsed_time += delta
-
+		
+	if audio_ended:
+		SceneManager.call_scene("main_menu")
+	
 	var current_sub: float = elapsed_time * beats_per_second * SUBDIVISIONS
 	var lookahead_sub: float = current_sub + lookahead_beats * SUBDIVISIONS
 
