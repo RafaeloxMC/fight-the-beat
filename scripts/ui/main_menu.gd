@@ -52,7 +52,8 @@ func spawn_lane(lane: Node3D) -> void:
 
 
 func _on_play_pressed() -> void:
-	SceneManager.call_scene("game")
+	if SongManager.currently_playing.stream != null:
+		SceneManager.call_scene("game")
 
 func _on_load_song_pressed() -> void:
 	DisplayServer.file_dialog_show("Select a Song file", "~/", "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE, [], _on_file_picked)
