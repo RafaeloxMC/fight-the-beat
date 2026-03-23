@@ -32,6 +32,8 @@ var audio_delay: float = 0.0
 var audio_ended: bool = false
 var audio_playing: bool = false
 
+var score = 0.0
+
 func _ready() -> void:
 	var song = SongManager.currently_playing
 	bpm = song.bpm
@@ -148,8 +150,9 @@ func _process(delta: float) -> void:
 					else:
 						box.queue_free()
 					combo += 1
+					score += 1 * bpm * float(max(1, combo / 16.0))
 
-	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d" % [
+	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d | Score: %d" % [
 		SongManager.currently_playing.title,
 		SongManager.currently_playing.artist,
 		SongManager.currently_playing.bpm,
@@ -158,7 +161,8 @@ func _process(delta: float) -> void:
 		_count_notes(SongManager.currently_playing.tiles_mr),
 		_count_notes(SongManager.currently_playing.tiles_rr),
 		tiles.size(),
-		combo
+		combo,
+		roundi(score * 100) / 100.0
 	]
 
 func _spawn_tile(lane: Node3D, beats_ahead: float, duration_beats: float) -> void:
