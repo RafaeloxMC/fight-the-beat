@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://dndiri3lqyjwh" path="res://assets/themes/theme.tres" id="1_sl1te"]
 [ext_resource type="Environment" uid="uid://r3rud53mhmmu" path="res://assets/environments/world.tres" id="3_1g8jr"]
 [ext_resource type="PackedScene" uid="uid://nd7dwmolsb7a" path="res://scenes/note.tscn" id="4_m1kxf"]
+[ext_resource type="FontFile" uid="uid://bhmcche7p6ely" path="res://assets/fonts/platinum_sign_over.ttf" id="4_uhagc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1kxf"]
 albedo_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
@@ -48,13 +49,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -166.0
-offset_top = 11.0
-offset_right = 166.0
-offset_bottom = 78.0
+offset_left = -162.0
+offset_top = -11.5
+offset_right = 350.0
+offset_bottom = 64.5
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_uhagc")
 theme_override_font_sizes/font_size = 48
-text = "Fight The Beat"
+text = "FIGHT THE BEAT"
 
 [node name="Play" type="Button" parent="Control" unique_id=1202928947]
 layout_mode = 1
@@ -64,13 +67,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = -150.0
-offset_right = 162.0
-offset_bottom = -75.0
+offset_top = -150.5
+offset_right = 238.0
+offset_bottom = -74.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
-text = "Play"
+text = "PLAY"
+alignment = 0
 
 [node name="Load Song" type="Button" parent="Control" unique_id=1289290886]
 layout_mode = 1
@@ -80,13 +84,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = -49.0
-offset_right = 162.0
-offset_bottom = 26.0
+offset_top = -49.5
+offset_right = 238.0
+offset_bottom = 26.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
-text = "Load Song"
+text = "LOAD SONG"
+alignment = 0
 
 [node name="Settings" type="Button" parent="Control" unique_id=594479966]
 layout_mode = 1
@@ -96,13 +101,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = 52.0
-offset_right = 162.0
-offset_bottom = 127.0
+offset_top = 51.5
+offset_right = 238.0
+offset_bottom = 127.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
-text = "Settings"
+text = "SETTINGS"
+alignment = 0
 
 [node name="Quit" type="Button" parent="Control" unique_id=283449347]
 layout_mode = 1
@@ -112,13 +118,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -162.0
-offset_top = 153.0
-offset_right = 162.0
-offset_bottom = 228.0
+offset_top = 152.5
+offset_right = 238.0
+offset_bottom = 228.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_sl1te")
-text = "Quit"
+text = "QUIT"
+alignment = 0
 
 [node name="3D Container" type="Node3D" parent="." unique_id=1262582697]
 
