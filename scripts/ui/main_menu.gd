@@ -66,7 +66,7 @@ func _on_file_picked(status: bool, selected_paths: PackedStringArray, _selected_
 		SongInterpreter.load_song_from_file(file)
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	SceneManager.call_scene("settings")
 
 
 func _on_quit_pressed() -> void:
