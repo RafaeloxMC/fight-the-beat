@@ -4,6 +4,7 @@ extends Node
 @onready var debug: Label = $"UI Container/DEBUG"
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
+@onready var texture_rect: TextureRect = $"UI Container/TextureRect"
 
 @export var base_tile: PackedScene
 @export var lanes: Array[Node3D] = []
@@ -47,14 +48,17 @@ func _ready() -> void:
 	audio_stream_player.stream = song.stream
 	
 	if song.bg:
-		var env: Environment = world_environment.environment.duplicate()
-		var sky: Sky = env.sky.duplicate()
-		var sky_mat: PanoramaSkyMaterial = sky.sky_material.duplicate()
-		
-		sky_mat.panorama = ImageTexture.create_from_image(song.bg)
-		sky.sky_material = sky_mat
-		env.sky = sky
-		world_environment.environment = env
+		if GameManager.background_mode:
+			var env: Environment = world_environment.environment.duplicate()
+			var sky: Sky = env.sky.duplicate()
+			var sky_mat: PanoramaSkyMaterial = sky.sky_material.duplicate()
+			
+			sky_mat.panorama = ImageTexture.create_from_image(song.bg)
+			sky.sky_material = sky_mat
+			env.sky = sky
+			world_environment.environment = env
+		else:
+			texture_rect.texture = ImageTexture.create_from_image(song.bg)
 	else:
 		var env: Environment = world_environment.environment.duplicate()
 		
