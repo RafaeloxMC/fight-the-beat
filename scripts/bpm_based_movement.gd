@@ -34,6 +34,8 @@ var audio_ended: bool = false
 var audio_playing: bool = false
 
 var score = 0.0
+var hit = 0
+var miss = 0
 
 func _ready() -> void:
 	var song = SongManager.currently_playing
@@ -129,6 +131,7 @@ func _process(delta: float) -> void:
 			tile.queue_free()
 			tiles.erase(tile)
 			combo = 0
+			miss += 1
 
 	var lanes_queued_for_deletion: Array[String] = []
 	if Input.is_action_just_pressed("LEFT_LANE"):
@@ -155,8 +158,9 @@ func _process(delta: float) -> void:
 						box.queue_free()
 					combo += 1
 					score += 1 * bpm * float(max(1, combo / 16.0))
+					hit += 1
 
-	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d | Score: %d" % [
+	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d | Score: %d | Hit / Miss: %d" % [
 		SongManager.currently_playing.title,
 		SongManager.currently_playing.artist,
 		SongManager.currently_playing.bpm,
@@ -166,7 +170,8 @@ func _process(delta: float) -> void:
 		_count_notes(SongManager.currently_playing.tiles_rr),
 		tiles.size(),
 		combo,
-		roundi(score * 100) / 100.0
+		roundi(score * 100) / 100.0,
+		roundi((hit / float(hit + miss)) * 1000.0) / 10.0
 	]
 
 func _spawn_tile(lane: Node3D, beats_ahead: float, duration_beats: float) -> void:
