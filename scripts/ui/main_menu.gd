@@ -16,8 +16,6 @@ func _ready() -> void:
 	spawn_lane(lanes[3])
 	
 	speed = bpm / 60.0 * speed_multiplier
-	
-	GameManager.transition.emit("fwd")
 
 func _process(delta: float) -> void:
 	for tile in tiles:

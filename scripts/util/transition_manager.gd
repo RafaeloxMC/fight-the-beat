@@ -3,7 +3,7 @@ extends ColorRect
 @export var duration: float = 0.3
 
 var time_left: float = duration
-var dir: String = "rev" # or fwd
+var dir: String = "fwd" # or rev
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
