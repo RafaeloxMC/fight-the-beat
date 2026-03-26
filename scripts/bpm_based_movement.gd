@@ -160,18 +160,15 @@ func _process(delta: float) -> void:
 					score += 1 * bpm * float(max(1, combo / 16.0))
 					hit += 1
 
-	debug.text = "%s - %s (%d BPM)\nLL: %d  ML: %d  MR: %d  RR: %d  |  Active tiles: %d | Combo: %d | Score: %d | Hit / Miss: %d" % [
+	debug.text = "%s - %s (%d BPM)\nActive tiles: %d | Combo: %d | Score: %d | Hit / Miss: %d%s" % [
 		SongManager.currently_playing.title,
 		SongManager.currently_playing.artist,
 		SongManager.currently_playing.bpm,
-		_count_notes(SongManager.currently_playing.tiles_ll),
-		_count_notes(SongManager.currently_playing.tiles_ml),
-		_count_notes(SongManager.currently_playing.tiles_mr),
-		_count_notes(SongManager.currently_playing.tiles_rr),
 		tiles.size(),
 		combo,
 		roundi(score * 100) / 100.0,
-		roundi((hit / float(hit + miss)) * 1000.0) / 10.0
+		roundi((hit / float(hit + miss)) * 1000.0) / 10.0,
+		"%"
 	]
 
 func _spawn_tile(lane: Node3D, beats_ahead: float, duration_beats: float) -> void:
