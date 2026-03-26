@@ -6,6 +6,11 @@ extends Node
 @onready var world_environment: WorldEnvironment = $WorldEnvironment
 @onready var texture_rect: TextureRect = $"UI Container/TextureRect"
 
+@onready var q: AnimationPlayer = $Lanes/LL/Q/AnimationPlayer
+@onready var w: AnimationPlayer = $Lanes/ML/W/AnimationPlayer
+@onready var e: AnimationPlayer = $Lanes/MR/E/AnimationPlayer
+@onready var r: AnimationPlayer = $Lanes/RR/R/AnimationPlayer
+
 @export var base_tile: PackedScene
 @export var lanes: Array[Node3D] = []
 
@@ -136,12 +141,16 @@ func _process(delta: float) -> void:
 	var lanes_queued_for_deletion: Array[String] = []
 	if Input.is_action_just_pressed("LEFT_LANE"):
 		lanes_queued_for_deletion.append("LL")
+		q.play("click")
 	if Input.is_action_just_pressed("ML_LANE"):
 		lanes_queued_for_deletion.append("ML")
+		w.play("click")
 	if Input.is_action_just_pressed("MR_LANE"):
 		lanes_queued_for_deletion.append("MR")
+		e.play("click")
 	if Input.is_action_just_pressed("RIGHT_LANE"):
 		lanes_queued_for_deletion.append("RR")
+		r.play("click")
 
 	var overlapping: Array[Node3D] = trigger_line.get_overlapping_bodies()
 	if overlapping.size() == 0 && lanes_queued_for_deletion.size() > 0:
