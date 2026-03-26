@@ -20,6 +20,7 @@ SceneManager="*uid://b3eqp5e3itgqa"
 SongInterpreter="*uid://d0w1jrtsstc10"
 SongManager="*uid://chros5odm0pjs"
 GameManager="*uid://ck5uunsrn5iyr"
+TransitionManager="*uid://307ia1ges0by"
 
 [editor_plugins]
 

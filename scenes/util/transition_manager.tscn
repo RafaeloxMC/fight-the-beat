@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://307ia1ges0by"]
+
+[ext_resource type="Shader" uid="uid://b3iyi4vbxhpkq" path="res://assets/shaders/transition.gdshader" id="1_skqao"]
+[ext_resource type="Script" uid="uid://bdhfhbb14j3ax" path="res://scripts/util/transition_manager.gd" id="2_pbb3w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pbb3w"]
+shader = ExtResource("1_skqao")
+shader_parameter/circle_size = 1.0
+
+[node name="TransitionManager" type="ColorRect" unique_id=1775442200]
+z_index = 4096
+z_as_relative = false
+material = SubResource("ShaderMaterial_pbb3w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_pbb3w")

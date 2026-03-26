@@ -10,4 +10,8 @@ func call_scene(scene: String) -> void:
 	if !packed:
 		print("Scene " + scene + " not found!")
 		return
+	GameManager.transition.emit("rev")
+	await get_tree().create_timer(TransitionManager.duration).timeout
 	call_packed(packed)
+	await get_tree().create_timer(0.25).timeout
+	GameManager.transition.emit("fwd")
