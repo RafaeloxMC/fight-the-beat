@@ -107,7 +107,7 @@ func _process(delta: float) -> void:
 			audio_ended = true
 		elapsed_time += delta
 		
-	if audio_ended:
+	if audio_ended && TransitionManager.time_left <= 0:
 		SceneManager.call_scene("main_menu")
 	
 	var current_sub: float = elapsed_time * beats_per_second * SUBDIVISIONS

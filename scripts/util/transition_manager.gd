@@ -32,6 +32,9 @@ func _process(delta: float) -> void:
 			print("NO MATERIAL")
 
 func transition(direction: String):
+	if time_left > 0:
+		print("Transition call cancelled because a transition is already running!")
+		return
 	print("Triggered transition " + str(direction))
 	if direction == "fwd":
 		play_fwd()
