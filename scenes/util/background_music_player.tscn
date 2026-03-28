@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://chmptax5b543t"]
+
+[ext_resource type="Script" uid="uid://4t1gl1kn5n7b" path="res://scripts/util/background_music_player.gd" id="1_0hyx5"]
+[ext_resource type="AudioStream" uid="uid://c8hga11oqnkbw" path="res://assets/music/FightTheBeat.wav" id="2_aemug"]
+
+[node name="BackgroundMusicPlayer" type="Node" unique_id=1739318729]
+script = ExtResource("1_0hyx5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1755742480]
+stream = ExtResource("2_aemug")

@@ -43,6 +43,7 @@ var hit = 0
 var miss = 0
 
 func _ready() -> void:
+	BackgroundMusicPlayer.stop()
 	var song = SongManager.currently_playing
 	bpm = song.bpm
 	beats_per_second = bpm / 60.0

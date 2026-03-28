@@ -16,6 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+BackgroundMusicPlayer="*uid://chmptax5b543t"
 SceneManager="*uid://b3eqp5e3itgqa"
 SongInterpreter="*uid://d0w1jrtsstc10"
 SongManager="*uid://chros5odm0pjs"
