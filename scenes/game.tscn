@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b3j0wcbd53ll1" path="res://scripts/bpm_based_movement.gd" id="2_yqjtg"]
 [ext_resource type="Environment" uid="uid://r3rud53mhmmu" path="res://assets/environments/world.tres" id="3_lbhrr"]
 [ext_resource type="FontFile" uid="uid://d1udplt4atumc" path="res://assets/fonts/keycap_font.otf" id="5_iywne"]
+[ext_resource type="FontFile" uid="uid://bhmcche7p6ely" path="res://assets/fonts/platinum_sign_over.ttf" id="5_p57ef"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xowi"]
 albedo_color = Color(0, 0, 0, 1)
@@ -92,6 +93,81 @@ albedo_color = Color(1, 1, 1, 0.09803922)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yqjtg"]
 size = Vector3(4, 0.5, 0.1)
+
+[sub_resource type="Animation" id="Animation_u5sy4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Continuing:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["CONTINUING IN 3..."]
+}
+
+[sub_resource type="Animation" id="Animation_gee14"]
+resource_name = "in"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Continuing:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["CONTINUING IN 3...", "CONTINUING IN 3...", "CONTINUING IN 2...", "CONTINUING IN 1...", "CONTINUING IN 0..."]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_back_to_main_menu"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tnpc"]
+_data = {
+&"RESET": SubResource("Animation_u5sy4"),
+&"in": SubResource("Animation_gee14")
+}
 
 [node name="Game" type="Node3D" unique_id=1119444477 node_paths=PackedStringArray("lanes")]
 script = ExtResource("2_yqjtg")
@@ -220,5 +296,83 @@ expand_mode = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Finish" type="Control" parent="UI Container" unique_id=597709397]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI Container/Finish" unique_id=1258935998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.19607843)
+
+[node name="Finished" type="Label" parent="UI Container/Finish" unique_id=909517509]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.5
+offset_top = -167.0
+offset_right = 51.5
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_p57ef")
+theme_override_font_sizes/font_size = 64
+text = "FINISHED!"
+
+[node name="Score" type="Label" parent="UI Container/Finish" unique_id=162194813]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.5
+offset_top = -52.5
+offset_right = 288.5
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_p57ef")
+theme_override_font_sizes/font_size = 32
+text = "SCORE - 12345
+HIT-MISS RATIO - 12. 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continuing" type="Label" parent="UI Container/Finish" unique_id=1184844026]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = 103.5
+offset_right = 205.5
+offset_bottom = 204.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_p57ef")
+theme_override_font_sizes/font_size = 32
+text = "CONTINUING IN 3..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI Container/Finish" unique_id=25026537]
+libraries/ = SubResource("AnimationLibrary_0tnpc")
+autoplay = &"RESET"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1452646406]

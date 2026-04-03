@@ -11,6 +11,9 @@ extends Node
 @onready var e: AnimationPlayer = $Lanes/MR/E/AnimationPlayer
 @onready var r: AnimationPlayer = $Lanes/RR/R/AnimationPlayer
 
+@onready var finished_score: Label = $"UI Container/Finish/Score"
+@onready var finished_player: AnimationPlayer = $"UI Container/Finish/AnimationPlayer"
+
 @export var base_tile: PackedScene
 @export var lanes: Array[Node3D] = []
 
@@ -109,7 +112,9 @@ func _process(delta: float) -> void:
 		elapsed_time += delta
 		
 	if audio_ended && TransitionManager.time_left <= 0:
-		SceneManager.call_scene("main_menu")
+		finished_player.play("in")
+		
+	finished_score.text = "SCORE - %d\nHIT-MISS RATIO - %d" % [(score), clamp(roundi((hit / float(hit + miss)) * 1000.0) / 10.0, 0, 100)]
 	
 	var current_sub: float = elapsed_time * beats_per_second * SUBDIVISIONS
 	var lookahead_sub: float = current_sub + lookahead_beats * SUBDIVISIONS
@@ -177,7 +182,7 @@ func _process(delta: float) -> void:
 		tiles.size(),
 		combo,
 		roundi(score * 100) / 100.0,
-		roundi((hit / float(hit + miss)) * 1000.0) / 10.0,
+		clamp(roundi((hit / float(hit + miss)) * 1000.0) / 10.0, 0, 100),
 		"%"
 	]
 
@@ -193,3 +198,6 @@ func _spawn_tile(lane: Node3D, beats_ahead: float, duration_beats: float) -> voi
 	tile.position.z = TRIGGER_LINE_LOCAL_Z - beats_ahead * speed_multiplier
 	lane.add_child(tile)
 	tiles.append(tile)
+
+func _back_to_main_menu() -> void:
+	SceneManager.call_scene("main_menu")
