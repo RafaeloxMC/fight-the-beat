@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="fight-the-beat"
+run/main_scene="uid://c441tl3lusljd"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
